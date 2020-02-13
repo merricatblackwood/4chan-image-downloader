@@ -1,7 +1,7 @@
 # 4chan-image-downloader
 A script to download all images in a 4chan thread by width and height.
 
-##usage
+## usage
 ~~~~
 usage: main.py [-h] -t THREAD -b BOARD [-H HEIGHT] [-W WIDTH] [-o OUTPUT]
 
