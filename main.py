@@ -6,7 +6,7 @@ import argparse as ap
 
 def main(args):
 
-    base_url = "https://i.4cdn.org/wg/"
+    base_url = "https://i.4cdn.org/{0}/".format(args.board)
     req = r.get("https://a.4cdn.org/{0}/thread/{1}.json".format(args.board,
         args.thread))
     fn_list = valid_urls([[args.width],[args.height]], req.json()['posts'])
