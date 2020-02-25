@@ -25,7 +25,7 @@ def valid_urls(res, json, aspect_ratio):
     urls = {}
     if aspect_ratio != 0:
         ar = True
-        aspect_ratio = aspect_ratio.split("/")
+        aspect_ratio = aspect_ratio.split(":")
 
     for post in json:
         if 'filename' in post.keys():
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             help="directory to output the pictures", 
             default=os.path.join(os.path.expanduser("~"), "Pictures/chan/"))
     parser.add_argument("-r", "--ratio",
-            help="Select ratio of the image you need",
+            help="Select ratio of the image you need. Eg, 16:10",
             default=0)
     args = parser.parse_args()
     main(args)

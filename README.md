@@ -19,4 +19,7 @@ optional arguments:
                         width of the resolution you want
   -o OUTPUT, --output OUTPUT
                         directory to output the pictures
+  -r RATIO, --ratio RATIO
+                        Select ratio of the image you need. Eg, 16:10
+
 ~~~~
