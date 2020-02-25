@@ -9,8 +9,8 @@ def main(args):
     base_url = "https://i.4cdn.org/{0}/".format(args.board)
     req = r.get("https://a.4cdn.org/{0}/thread/{1}.json".format(args.board,
         args.thread))
-    fn_list = valid_urls([[args.width],[args.height]], req.json()['posts'])
-    count = 0;
+    fn_list = valid_urls([[args.width],[args.height]], req.json()['posts'], args.ratio)
+    count = 1
     if not os.path.isdir(args.output):
         os.makedirs(args.output)
     for fn in fn_list:
@@ -21,16 +21,24 @@ def main(args):
         print("\n")
         count+=1
 
-def valid_urls(res, json):
+def valid_urls(res, json, aspect_ratio):
     urls = {}
     for post in json:
         if 'filename' in post.keys():
-            if len(res) > 0 and (post['w'] in res[0]) and (post['h'] in res[1]):
-               urls[str(post["tim"]) + post["ext"]] = \
-                       post["filename"] + post["ext"]
-            elif res[0][0] == 0 and res[1][0] == 0:
-               urls[str(post["tim"]) + post["ext"]] = \
-                       post["filename"] + post["ext"]
+            if aspect_ratio == 0:
+                if len(res) > 0 and (post['w'] in res[0]) and (post['h'] in res[1]):
+                    urls[str(post["tim"]) + post["ext"]] = \
+                            post["filename"] + post["ext"]
+                elif res[0][0] == 0 and res[1][0] == 0:
+                    urls[str(post["tim"]) + post["ext"]] = \
+                            post["filename"] + post["ext"]
+            else:
+                aspect_ratio = aspect_ratio.split("/")
+                if aspect_ratio[0] / aspect_ratio[1] == post['w'] / post['h']:
+                    urls[str(post["tim"]) + post["ext"]] = \
+                            post["filename"] + post["ext"]
+                    
+
     return urls
 
 if __name__ == "__main__":
@@ -52,5 +60,8 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output",
             help="directory to output the pictures", 
             default=os.path.join(os.path.expanduser("~"), "Pictures/chan/"))
+    parser.add_argument("-r", "--ratio",
+            help="Select ratio of the image you need"
+            default=0)
     args = parser.parse_args()
     main(args)
