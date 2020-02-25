@@ -23,9 +23,13 @@ def main(args):
 
 def valid_urls(res, json, aspect_ratio):
     urls = {}
+    if aspect_ratio != 0:
+        ar = True
+        aspect_ratio = aspect_ratio.split("/")
+
     for post in json:
         if 'filename' in post.keys():
-            if aspect_ratio == 0:
+            if not ar:
                 if len(res) > 0 and (post['w'] in res[0]) and (post['h'] in res[1]):
                     urls[str(post["tim"]) + post["ext"]] = \
                             post["filename"] + post["ext"]
@@ -33,8 +37,7 @@ def valid_urls(res, json, aspect_ratio):
                     urls[str(post["tim"]) + post["ext"]] = \
                             post["filename"] + post["ext"]
             else:
-                aspect_ratio = aspect_ratio.split("/")
-                if aspect_ratio[0] / aspect_ratio[1] == post['w'] / post['h']:
+                if int(aspect_ratio[0]) / int(aspect_ratio[1]) == post['w'] / post['h']:
                     urls[str(post["tim"]) + post["ext"]] = \
                             post["filename"] + post["ext"]
                     
@@ -61,7 +64,7 @@ if __name__ == "__main__":
             help="directory to output the pictures", 
             default=os.path.join(os.path.expanduser("~"), "Pictures/chan/"))
     parser.add_argument("-r", "--ratio",
-            help="Select ratio of the image you need"
+            help="Select ratio of the image you need",
             default=0)
     args = parser.parse_args()
     main(args)
