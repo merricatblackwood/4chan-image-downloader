@@ -1,5 +1,6 @@
 # 4chan-image-downloader
-A script to download all images in a 4chan thread by width and height.
+A 4chan image downloader which downloads all images in a thread. Images can be filtered by height x width or by ratio (16:9). 
+I mainly only use it for wallpapers.
 
 ## usage
 ~~~~
