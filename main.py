@@ -34,15 +34,12 @@ def valid_urls(res, json, aspect_ratio):
         if 'filename' in post.keys():                                                           # Determines if there is a picture in the post
             if not ar:                                                                          # If aspect ratio isn't specified
                 if len(res) > 0 and (post['w'] in res[0]) and (post['h'] in res[1]):            # If height and width matches user 
-                    urls[str(post["tim"]) + post["ext"]] = \                                    
-                            post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
+                    urls[str(post["tim"]) + post["ext"]] = post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
                 elif res[0][0] == 0 and res[1][0] == 0:                                         # If resolution isn't specified
-                    urls[str(post["tim"]) + post["ext"]] = \
-                            post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
+                    urls[str(post["tim"]) + post["ext"]] = post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
             else:
                 if int(aspect_ratio[0]) / int(aspect_ratio[1]) == post['w'] / post['h']:        # Image aspect ratio matches user defined one
-                    urls[str(post["tim"]) + post["ext"]] = \                                    
-                            post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
+                    urls[str(post["tim"]) + post["ext"]] = post["filename"] + post["ext"]                                      # Add file key to dict with filename as the value
                     
 
     return urls  
