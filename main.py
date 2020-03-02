@@ -26,6 +26,7 @@ def main(args):
 # returns a list of valid picture filenames
 def valid_urls(res, json, aspect_ratio):
     urls = {}
+    ar = False
     if aspect_ratio != 0:                       # determines if aspect ratio is specified by user
         ar = True                               # sets ar to True
         aspect_ratio = aspect_ratio.split(":")  # splits aspect ratio into an array  of two parts
