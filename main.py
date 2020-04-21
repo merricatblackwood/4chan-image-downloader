@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import sys
 import requests as r
 import os
@@ -6,8 +8,8 @@ import argparse as ap
 
 def main(args):
     base_url = "https://i.4cdn.org/{0}/".format(args.board)                                # 4chan image url formatted with user specified board
-    req = r.get("https://a.4cdn.org/{0}/thread/{1}.json".format(args.board,                # 4chan api url, formateed with user specified board and thread
-        args.thread))
+    req_url = "https://a.4cdn.org/{0}/thread/{1}.json".format(args.board, args.thread)
+    req = r.get(req_url)                                                                   # 4chan api url, formateed with user specified board and thread
     fn_list = valid_urls([[args.width],[args.height]], req.json()['posts'], args.ratio)    # uses valid_urls to create a dict of image files and filenames
     count = 1                                                                              # Initialize counter 
 
