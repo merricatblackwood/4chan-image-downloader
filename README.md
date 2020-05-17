@@ -1,6 +1,12 @@
 # 4chan-image-downloader
-A 4chan image downloader which downloads all images in a thread. Images can be filtered by height x width or by ratio (16:9). 
+A 4chan image downloader which downloads all images in a thread. Images can be filtered by height x width or by ratio ( e.g 16:9 ). 
 I mainly only use it for wallpapers.
+
+## Dependencies
+
+wget
+requests
+argparse
 
 ## usage
 ~~~~
